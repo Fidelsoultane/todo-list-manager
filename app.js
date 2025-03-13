@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require("path");
 
 // Importer le modèle Task
 const Task = require('./models/task');
@@ -84,6 +85,10 @@ app.delete('/api/tasks/:id', async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
+
+// Servir automatiquement tous les fichiers dans "public/"
+app.use(express.static(path.join(__dirname, "public")));
+
 
 
 // Démarrage du serveur
